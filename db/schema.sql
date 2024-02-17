@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS turpial_db;
+CREATE DATABASE turpial_db;
