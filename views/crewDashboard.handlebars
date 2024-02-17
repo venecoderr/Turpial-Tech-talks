@@ -1,0 +1,31 @@
+<section>
+  <div>
+    {{>header-profile}}
+  </div>
+
+  <main>
+    <div class="title">
+      <h1>Crew Member Dashboard</h1>
+    </div>
+
+    <div class="card-container">
+      <div class="card">
+        <h2>Tasks</h2>
+        <div class="card-content">
+          {{#if projects.length}}
+            <ul>
+            {{#each projects}}
+              <li class="col-12 border border-light rounded-1 my-2">
+                <a class="text-decoration-none text-light" href="/projects/{{id}}">
+                  <h3 class="m-1">{{project_name}}</h3>
+                  <p class="m-1">{{phase.phase_name}}</p>
+                </a>
+              </li>
+            {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
