@@ -1,0 +1,19 @@
+<nav class="container-fluid col-3 flex-column vh-100 sidebar">
+    <ul class="nav nav-underline flex-column text-center">
+        <li class="nav-item mx-auto w-50">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item mx-auto w-50">
+            <a class="nav-link" href="/">Profile</a>
+        </li>
+        {{#if logged_in}}
+        <li class="nav-item mx-auto w-50">
+            <a class="nav-link" href="/">Log Out</a>
+        </li>
+        {{else}}
+        <li class="nav-item mx-auto w-50">
+            <a class="nav-link" href="/">Log In</a>
+        </li>
+        {{/if}}
+    </ul>
+</nav>

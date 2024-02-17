@@ -1,15 +1,11 @@
-<section>
-  <div class="card-img-overlay">
-    <div class="flex-column justify-space-around">
-      <main>
-        <div class="container">
-          <h1 class="text-center"><a href="/profile" id="welcome" class="shimmer">TaskPro</a></h1>
-          <p>(Click to start)</p>
-        </div>
-      </main>
-    </div>
-    {{#if logged_in}}
+<main class="container">
+  {{>header}}
+  <section id="app" class="container-fluid row">
+    {{>nav}}
+    {{>feed}}
+  </section>
+    {{!-- {{#if logged_in}}
     <script src="/js/logout.js"></script>
-    {{/if}}
-  </div>
-</section>
+    {{/if}} --}}
+
+</main>
