@@ -1,0 +1,14 @@
+<section class="container-fluid col-9 mx-auto">
+    {{#each posts as |post|}}
+        <section class="card m-2">
+        <section class="card-header">
+            {{post.title}} on {{post.createdAt}}
+        </section>
+        <section class="card-body">
+            <h5 class="card-title">{{post.user.username}} </h5>
+            <p class="card-text m-1">{{post.text}}</p>
+            <a href="/posts/{{post.id}}" class="btn btn-warning m-1">Leave a comment</a>
+        </section>
+        </section>
+    {{/each}}
+</section>

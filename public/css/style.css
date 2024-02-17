@@ -1,0 +1,29 @@
+:root {
+    --yellow: #FFB601;
+    --brown: #C98645;
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.nav-item a {
+    color: black;
+    font-size: 1.5em;
+}
+
+.nav-item a:hover {
+    color: white;
+}
+.sidebar {
+    background-color: var(--yellow);
+}
+
+#navbar {
+    background-color: var(--yellow);
+}
+
+#logo-text {
+    font-size: 3em;
+    font-family: "Protest Riot", sans-serif;
+}

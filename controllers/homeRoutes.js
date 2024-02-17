@@ -1,10 +1,23 @@
 import { Router } from 'express'
+import * as models from '../models/Index.js'
 import { withAuth } from '../utils/auth.js'
 
 export const homeRoutes = Router()
 
 homeRoutes.get('/', async (req, res) => {
-  res.json('test')
+  const postData = await models.Post.findAll({ 
+        include: [
+          {
+            model: models.User,
+            attributes: ['username'],
+          },
+        ]})
+
+  const posts = postData.map((i) => i.get({plain: true}))
+  
+  res.render('homepage', {
+    posts
+  })
 })
 
 // homeRoutes.get('/projects/:id', withAuth, async (req, res) => {
