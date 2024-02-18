@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { User, Post } from '../../models/Index.js'
+import { User, Post, Comment } from '../../models/Index.js'
+import { withAuth } from '../../utils/auth.js'
 
 export const postRoutes = Router()
 
@@ -51,7 +52,7 @@ postRoutes.get('/:id', async (req, res) => {
   }
 })
 
-postRoutes.post('/', async (req, res) => {
+postRoutes.post('/', withAuth, async (req, res) => {
   // create a new post
   try {
     const newPost = {
@@ -69,7 +70,7 @@ postRoutes.post('/', async (req, res) => {
   }
 })
 
-postRoutes.put('/:id', async (req, res) => {
+postRoutes.put('/:id', withAuth, async (req, res) => {
   // update a post's data by its `id` value
   try {
     const updatedPost = await Post.update(req.body, {
@@ -91,16 +92,21 @@ postRoutes.put('/:id', async (req, res) => {
   }  
 })
 
-postRoutes.delete('/:id', async (req, res) => {
+postRoutes.delete('/:id', withAuth, async (req, res) => {
   // deletes post by its `id` value
   try {
+    const deletedComments = await Comment.destroy({
+      where: {
+        on_post: req.params.id,
+      },
+    })
     const deletedPost = await Post.destroy({
       where: {
         id: req.params.id,
       },
     })
 
-    if (!deletedPost) {
+    if (!deletedPost && deletedComments) {
       res.status(404).json({ message: 'No post found with this id!' })
       return
     }

@@ -8,4 +8,4 @@ export const apiIndex = Router()
 
 apiIndex.use('/users', userRoutes)
 apiIndex.use('/posts', postRoutes)
-apiIndex.use('/comments', commentRoutes)
+apiIndex.use('/comments', withAuth, commentRoutes)

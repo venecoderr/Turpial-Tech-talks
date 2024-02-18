@@ -1,25 +1,61 @@
 <section class="container-fluid col-9 vh-100 text-light">
     <h2 id="logo-text" class="m-2">Profile Info</h2>
-    <section class="card w-100 m-2" style="width: 18rem;">
+    <section class="card w-100 m-2">
         <section class="card-body">
             <h2 class="card-title">Username: {{username}}</h2>
             <h3 class="card-subtitle mb-2 text-body-secondary">Email: {{email}}</h3>
-            <button type="button" class="btn btn-warning">New Post</button>
+            <button id="new-post-btn" type="button" class="btn btn-warning">New Post</button>
         </section>
     </section>
+
+    <section class="container-fluid d-flex justify-content-center">
+        <form action="submit" id="new-post-form" class="form m-2 w-75 align-items-center flex-column  d-none">
+            <section class="form-group m-2 w-75">
+                <input class="form-input w-100" type="text" id="post-title" placeholder="Title">
+            </section>
+            <section class="form-group m-2">
+                <textarea name="post-text" id="post-text-input" cols="45" rows="10" default="type your comment here..."></textarea>
+            </section>
+            <section class="form-group m-2 w-75">
+                <button id="post-it-btn" class="btn btn-warning w-100" type="submit">Post it</button>
+            </section>
+        </form>
+    </section>
+
     <section class="container m-2">
         <h2 id="logo-text">Recent posts</h2>
-        {{#each posts as |post|}}
-            <a href="/posts/{{post.id}}" class="card-text m-1  text-dark text-decoration-none">
-                <section class="card">
-                    <section class="card-header">
-                        {{post.title}} on {{post.createdAt}}
-                    </section>
-                    <section class="card-body">
-                        <p class="card-text m-1">{{post.text}}</p>
+        <section class="accordion accordion-flush m-2" id="accordionFlushExample">
+            {{#each posts as |post|}}
+                <section class="accordion-item m-2">
+                    <h2 class="accordion-header title-display">
+                        <button class="accordion-button collapsed accordion-main" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-{{id}}" aria-expanded="false" aria-controls="flush-collapseOne-{{id}}">
+                            {{title}} ({{created_at}})
+                        </button>
+                    </h2>
+                    <section id="flush-collapseOne-{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <section class="accordion-body row">
+                            <section class="form-group m-2 mb-4 col-12 fs-5">
+                                <p>"<span class="original-text">{{text}}</span>"</p>
+                            </section>
+                            <button type="button" class="btn btn-warning col-5 mx-auto update-post-btn" data-post-id="{{id}}">Update Post</button>
+                            <button type="button" class="btn btn-danger col-5 mx-auto delete-post-btn" data-post-id="{{id}}">Delete</button>
+                            <section class="container-fluid d-flex justify-content-center">
+                                <form action="submit" class="form m-2 w-75 align-items-center flex-column d-none update-post-form">
+                                    <section class="form-group m-2 w-75">
+                                        <input class="form-input w-100 updated-post-title" type="text" placeholder="{{title}}" value="{{title}}">
+                                    </section>
+                                    <section class="form-group m-2">
+                                        <textarea name="post-text" class="updated-post-text-input" cols="45" rows="10"></textarea>
+                                    </section>
+                                    <section class="form-group m-2 w-75">
+                                        <button class="btn btn-warning w-100 update-it-btn " type="submit" data-post-id="{{id}}">Update it</button>
+                                    </section>
+                                </form>
+                            </section>
+                        </section>
                     </section>
                 </section>
-            </a>
-        {{/each}}
+            {{/each}}
+        </section>
     </section>
 </section>
