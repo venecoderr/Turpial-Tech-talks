@@ -1,11 +1,11 @@
 <main class="container">
   {{>header}}
-  <section id="app" class="container-fluid row">
-    {{>nav}}
-    {{>feed}}
+  <section id="app" class="container-fluid row" data-logged-in="{{logged_in}}">
+    <section class="container-fluid col-3">{{>nav}}</section>
+    <section class="container-fluid col-9 row">{{>feed}}</section>
   </section>
-
-  {{#if logged_in}}
-    <script type="module" src="/js/logout.js"></script>
-  {{/if}}
 </main>
+<script type="module" src="/js/feed.js"></script>
+{{#if logged_in}}
+  <script type="module" src="/js/logout.js"></script>
+{{/if}}

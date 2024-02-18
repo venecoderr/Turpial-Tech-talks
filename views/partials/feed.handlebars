@@ -1,14 +1,18 @@
-<section class="container-fluid col-9 mx-auto">
+<section class="accordion accordion-flush m-2" id="accordionFlushExample">
     {{#each posts as |post|}}
-        <section class="card m-2">
-        <section class="card-header">
-            {{post.title}} on {{post.createdAt}}
-        </section>
-        <section class="card-body">
-            <h5 class="card-title">{{post.user.username}} </h5>
-            <p class="card-text m-1">{{post.text}}</p>
-            <a href="/posts/{{post.id}}" class="btn btn-warning m-1">Leave a comment</a>
-        </section>
+        <section class="accordion-item m-2">
+            <h2 class="accordion-header title-display">
+                <button class="accordion-button collapsed accordion-main" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-{{id}}" aria-expanded="false" aria-controls="flush-collapseOne-{{id}}">
+                    {{title}} ({{created_at}})
+                </button>
+            </h2>
+            <section id="flush-collapseOne-{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <section class="accordion-body row">
+                <section class="col-12 m-1"><span class="fs-4">By {{user.username}} on {{created_at}}</span></section>
+                <section class="col-6">{{text}}</section>
+                <section class="col-6 row">{{>comment-box}}</section>
+            </section>
+            </section>
         </section>
     {{/each}}
 </section>

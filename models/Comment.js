@@ -2,6 +2,7 @@ import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../config/connection.js'
 import { User } from './User.js'
 import { Post } from './Post.js'
+import moment from 'moment'
 
 export class Comment extends Model {
 
@@ -39,6 +40,16 @@ Comment.init(
   {
     sequelize,
     timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    getterMethods: {
+      created_at: function() {
+        return moment(this.getDataValue('created_at')).format('MMM Do, YYYY NN');
+      },
+      updated_at: function() {
+        return moment(this.getDataValue('updated_at')).format('MMM Do, YYYY NN');
+      },
+    },
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',

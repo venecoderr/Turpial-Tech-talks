@@ -1,0 +1,19 @@
+<section class="container border ">
+    <p class="fs-5 m-1">Comments: </p>
+    <section class="row">
+        {{#each comments as |comment|}}
+            <section class="m-1 border col-12">
+                <p class="m-1">-{{user.username}} on {{created_at}}</p>
+                <p class="m-1">"{{text}}"</p>
+            </section>
+        {{/each}}
+        <section class="row m-1">
+            <section class="col-9 row">
+                <label class="col-12" for="input-comment">Comment:</label>
+                <textarea class="col-12" name="comment" id="input-comment" cols="10" rows="2"></textarea>
+            </section>
+            <button class="btn btn-warning m-1 col-3 add-comment-btn" data-post-id="{{id}}">Add comment</button>
+        </section>
+    </section>
+
+</section>

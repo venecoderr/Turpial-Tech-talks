@@ -1,47 +1,106 @@
-const newFormHandler = async (event) => {
-  event.preventDefault();
+import $ from "./utils/jQuery.js"
 
-  const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document.querySelector('#project-funding').value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
+const newBtn = $('#new-post-btn')
+const updateBtn = $('.update-post-btn')
+const deleteBtn = $('.delete-post-btn')
+const postForm = $('#new-post-form')
+const updateForm = $('.update-post-form')
 
-  if (name && needed_funding && description) {
-    const response = await fetch(`/api/projects`, {
+const newPostHandler = async (event) => {
+  event.preventDefault()
+
+  const postTitle = $('#post-title').val()
+  const postText = $('#post-text-input').val()
+
+  if (postTitle && postText) {
+    const newPost = {
+      title: postTitle,
+      text: postText
+    }
+    
+    const response = await fetch('/api/posts', {
       method: 'POST',
-      body: JSON.stringify({ name, needed_funding, description }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+      body: JSON.stringify(newPost),
+      headers: { 'Content-Type': 'application/json' },
+    })
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/')
     } else {
-      alert('Failed to create project');
+      alert(response.statusText)
     }
   }
-};
 
-const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
+}
 
-    const response = await fetch(`/api/projects/${id}`, {
+const updatePostHandler = async (event) => {
+  event.preventDefault()
+
+  const updatedPostTitle = $(event.target).find('.updated-post-title').val()
+  const updatedPostText = $(event.target).find('.updated-post-text-input').val()
+  const postToUpdate = $(event.target).find('.update-it-btn').attr('data-post-id')
+
+  if (updatedPostTitle && updatedPostText) {
+    const updatedPost = {
+      title: updatedPostTitle,
+      text: updatedPostText
+    }
+    
+    const response = await fetch(`/api/posts/${postToUpdate}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedPost),
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    if (response.ok) {
+      document.location.replace('/')
+    } else {
+      alert(response.statusText)
+    }
+  }
+
+}
+
+const deletePostHandler = async (event) => {
+  const postToDelete = $(event.target).attr('data-post-id')
+
+  if (postToDelete) {
+    const response = await fetch(`/api/posts/${postToDelete}`, {
       method: 'DELETE',
-    });
+      headers: { 'Content-Type': 'application/json' },
+    })
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/')
     } else {
-      alert('Failed to delete project');
+      alert(response.statusText)
     }
   }
-};
 
-document
-  .querySelector('.new-project-form')
-  .addEventListener('submit', newFormHandler);
+}
 
-document
-  .querySelector('.project-list')
-  .addEventListener('click', delButtonHandler);
+const toggleNewForm = (event) => {
+  $(postForm).toggleClass('d-flex d-none')
+  if($(newBtn).text() === 'New Post'){
+    $(newBtn).text('Cancel')
+  }else{
+    $(newBtn).text('New Post')
+  }
+}
+
+const toggleUpdateForm = (event) => {
+  $(event.target).parent().find('.update-post-form').toggleClass('d-flex d-none')
+  if($(event.target).text() === 'Update Post'){
+    $(event.target).text('Cancel')
+    $(event.target).parent().find('.updated-post-text-input').text($(event.target).parent().find('.original-text').text())
+  }else{
+    $(event.target).text('Update Post')
+    $(event.target).parent().find('.updated-post-text-input').text('')
+  }
+}
+
+newBtn.on('click', toggleNewForm)
+updateBtn.on('click', toggleUpdateForm)
+deleteBtn.on('click', deletePostHandler)
+postForm.on('submit', newPostHandler)
+updateForm.on('submit', updatePostHandler)
