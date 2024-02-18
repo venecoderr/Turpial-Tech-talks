@@ -1,14 +1,14 @@
 import { Router } from 'express'
-import * as models from '../models/Index.js'
+import { User, Post } from '../models/Index.js'
 import { withAuth } from '../utils/auth.js'
 
 export const homeRoutes = Router()
 
 homeRoutes.get('/', async (req, res) => {
-  const postData = await models.Post.findAll({ 
+  const postData = await Post.findAll({ 
         include: [
           {
-            model: models.User,
+            model: User,
             attributes: ['username'],
           },
         ]})
@@ -16,7 +16,8 @@ homeRoutes.get('/', async (req, res) => {
   const posts = postData.map((i) => i.get({plain: true}))
   
   res.render('homepage', {
-    posts
+    posts,
+    logged_in: req.session.logged_in
   })
 })
 
