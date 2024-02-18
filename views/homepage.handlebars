@@ -4,8 +4,8 @@
     {{>nav}}
     {{>feed}}
   </section>
-    {{!-- {{#if logged_in}}
-    <script src="/js/logout.js"></script>
-    {{/if}} --}}
 
+  {{#if logged_in}}
+    <script type="module" src="/js/logout.js"></script>
+  {{/if}}
 </main>
