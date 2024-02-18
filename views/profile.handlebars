@@ -1,25 +1,9 @@
-<section>
+<main class="container">
+  {{>header}}
+  <section id="app" class="container-fluid row">
+    {{>nav}}
+    {{>profile-details}}
+  </section>
+</main>
 
-{{> header-dashboard}}
-
-  <main>
-    <div class="profileContainer">
-      <h1 class="profileTitle">{{first_name}}'s Profile</h1>
-    </div>
-
-    <div class="card-container">
-      <div class="card">
-        <div class="card-content">
-          <h2>{{last_name}}, {{first_name}}</h2>
-          <h3><strong>Crew #</strong> {{crew_id}}</h3>
-          <h3 class="emailText"><strong>Work Email:</strong><br>{{email}}</h3>
-          <h3><strong>Position:</strong> {{#if is_manager}}manager{{else}}{{#if is_supervisor}}supervisor{{else}}crew{{/if}}{{/if}}</h3>
-          <h4>Tasks completed: {{task_completed}}</h4>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <script type="module" src="../public/js/logout.js"></script>
-
-</section>
+<script type="module" src="/js/logout.js"></script>

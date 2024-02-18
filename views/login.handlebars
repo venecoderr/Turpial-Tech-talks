@@ -2,12 +2,11 @@
   {{>header}}
   <section id="app" class="container-fluid row">
     {{>nav}}
-    {{>logIn}}
+    {{>login-details}}
   </section>
-    {{!-- {{#if logged_in}}
-    <script src="/js/logout.js"></script>
-    {{/if}} --}}
-
 </main>
 
-<script type="module" src="../public/js/login.js"></script>
+<script type="module" src="/js/login.js"></script>
+{{#if logged_in}}
+  <script src="/js/logout.js"></script>
+{{/if}}

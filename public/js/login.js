@@ -1,9 +1,7 @@
 import $ from "./utils/jQuery.js"
 
-let logInForm = $('#login-btn')
-let signUpForm = $('#signup-btn')
-let roleDropdown = $('#role-dropdown')
-let roleLi = $('.role-li')
+let logInForm = $('#login-form')
+let signUpForm = $('#sign-up-form')
 
 const loginFormHandler = async (event) => {
   event.preventDefault()
@@ -32,29 +30,15 @@ const loginFormHandler = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault()
 
-  const firstName = $('#first-name-signup').val()
-  const lastName = $('#last-name-signup').val()
+  const username = $('#username-signup').val()
   const email = $('#email-signup').val()
   const password = $('#password-signup').val()
-  const role = $(roleDropdown).text()
 
-  if (firstName && lastName && role && email && password) {
+  if (username && email && password) {
     let newUser = {
-      first_name: firstName,
-      last_name: lastName,
+      username: username,
       email: email,
-      is_manager: false, 
-      is_supervisor: false,
       password: password,
-    }
-
-    switch (role){
-      case 'Supervisor':
-        newUser.is_supervisor = true
-        break
-      case 'Manager':
-        newUser.is_manager = true
-        break      
     }
     
     const response = await fetch('/api/users', {
@@ -71,11 +55,6 @@ const signupFormHandler = async (event) => {
   }
 }
 
-function selectRole (event) {
-  let selection = $(event.target).text()
-  $(roleDropdown).text(selection)
-}
 
-logInForm.on('click', loginFormHandler)
-signUpForm.on('click', signupFormHandler)
-roleLi.on('click', selectRole)
+logInForm.on('submit', loginFormHandler)
+signUpForm.on('submit', signupFormHandler)

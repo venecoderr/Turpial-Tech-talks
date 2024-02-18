@@ -4,15 +4,15 @@
             <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item mx-auto w-50">
-            <a class="nav-link" href="/">Profile</a>
+            <a class="nav-link" href="/profile">Profile</a>
         </li>
         {{#if logged_in}}
         <li class="nav-item mx-auto w-50">
-            <a class="nav-link" href="/">Log Out</a>
+            <a id="logout" class="nav-link" href="/">Log Out</a>
         </li>
         {{else}}
         <li class="nav-item mx-auto w-50">
-            <a class="nav-link" href="/">Log In</a>
+            <a class="nav-link" href="/login">Log In</a>
         </li>
         {{/if}}
     </ul>
