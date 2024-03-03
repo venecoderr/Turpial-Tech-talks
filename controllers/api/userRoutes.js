@@ -1,11 +1,14 @@
+//Imports for Models, Router and utilities
 import { Router } from 'express'
 import { User } from '../../models/Index.js'
 import { withAuth } from '../../utils/auth.js'
 
+//Router instance
 export const userRoutes = Router()
 
+//Gets all users
 userRoutes.get('/',  withAuth,  async (req, res) => {
-  //Gets all users
+
   try {
     const userData = await User.findAll({attributes: {exclude: ['password']}})
 
@@ -22,8 +25,9 @@ userRoutes.get('/',  withAuth,  async (req, res) => {
   }
 })
 
+//Gets one user by ID
 userRoutes.get('/:id', withAuth, async (req, res) => {
-  //Gets one project by ID
+
   try {
     const userData = await User.findByPk(req.params.id, {attributes: {exclude: ['password']}})
 
@@ -40,6 +44,7 @@ userRoutes.get('/:id', withAuth, async (req, res) => {
   }
 })
 
+//Creates new user
 userRoutes.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body)
@@ -54,6 +59,7 @@ userRoutes.post('/', async (req, res) => {
   }
 })
 
+//Logs user in
 userRoutes.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } })
@@ -85,6 +91,7 @@ userRoutes.post('/login', async (req, res) => {
   }
 })
 
+//Logs user out
 userRoutes.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -95,8 +102,9 @@ userRoutes.post('/logout', (req, res) => {
   }
 })
 
+// update a user's data by its `id` value
 userRoutes.put('/:id', withAuth, async (req, res) => {
-  // update a project's data by its `id` value
+
   try {
     const updatedUser = await User.update(req.body, {
       where: {
@@ -117,8 +125,8 @@ userRoutes.put('/:id', withAuth, async (req, res) => {
   }  
 })
 
+// deletes user by its `id` value
 userRoutes.delete('/:id', withAuth, async (req, res) => {
-  // deletes project by its `id` value
   try {
     const deletedUser = await User.destroy({
       where: {

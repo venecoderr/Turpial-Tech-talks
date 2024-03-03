@@ -1,11 +1,13 @@
+//Imports for Models, Router and utilities
 import { Router } from 'express'
 import { User, Post, Comment } from '../../models/Index.js'
 import { withAuth } from '../../utils/auth.js'
 
+//Router instance
 export const postRoutes = Router()
 
+//Gets all posts
 postRoutes.get('/', async (req, res) => {
-  //Gets all posts
   try {
     const postData = await Post.findAll({ 
         include: [
@@ -28,8 +30,8 @@ postRoutes.get('/', async (req, res) => {
   }
 })
 
+//Gets one post by ID
 postRoutes.get('/:id', async (req, res) => {
-  //Gets one post by ID
   try {
     const postData = await Post.findByPk(req.params.id, { 
         include: [
@@ -52,8 +54,8 @@ postRoutes.get('/:id', async (req, res) => {
   }
 })
 
+//Create a new post
 postRoutes.post('/', withAuth, async (req, res) => {
-  // create a new post
   try {
     const newPost = {
         author_id: req.session.user_id,
@@ -70,8 +72,8 @@ postRoutes.post('/', withAuth, async (req, res) => {
   }
 })
 
+//Update a post's data by its `id` value
 postRoutes.put('/:id', withAuth, async (req, res) => {
-  // update a post's data by its `id` value
   try {
     const updatedPost = await Post.update(req.body, {
       where: {
@@ -92,8 +94,8 @@ postRoutes.put('/:id', withAuth, async (req, res) => {
   }  
 })
 
+//Deletes post by its `id` value
 postRoutes.delete('/:id', withAuth, async (req, res) => {
-  // deletes post by its `id` value
   try {
     const deletedComments = await Comment.destroy({
       where: {

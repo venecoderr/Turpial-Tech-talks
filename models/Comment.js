@@ -1,9 +1,11 @@
+//Imports
 import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../config/connection.js'
 import { User } from './User.js'
 import { Post } from './Post.js'
 import moment from 'moment'
 
+//Model definition
 export class Comment extends Model {
 
 }

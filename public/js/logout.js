@@ -1,7 +1,10 @@
+//Imports
 import $ from "./utils/jQuery.js"
 
+//Selectors
 let logOutBtn = $('#logout')
 
+//Handles logout button
 const logout = async () => {
   const response = await fetch('/api/users/logout', {
     method: 'POST',
@@ -15,4 +18,5 @@ const logout = async () => {
   }
 };
 
+//Event listeners
 logOutBtn.on('click', logout);

@@ -1,11 +1,14 @@
+//Imports
 import $ from "./utils/jQuery.js"
 
+//Selectors
 const newBtn = $('#new-post-btn')
 const updateBtn = $('.update-post-btn')
 const deleteBtn = $('.delete-post-btn')
 const postForm = $('#new-post-form')
 const updateForm = $('.update-post-form')
 
+//Handles new post form
 const newPostHandler = async (event) => {
   event.preventDefault()
 
@@ -33,6 +36,7 @@ const newPostHandler = async (event) => {
 
 }
 
+//Handles update post form
 const updatePostHandler = async (event) => {
   event.preventDefault()
 
@@ -61,6 +65,7 @@ const updatePostHandler = async (event) => {
 
 }
 
+//Handles delete button
 const deletePostHandler = async (event) => {
   const postToDelete = $(event.target).attr('data-post-id')
 
@@ -79,6 +84,8 @@ const deletePostHandler = async (event) => {
 
 }
 
+//Button togglers
+  //New post button
 const toggleNewForm = (event) => {
   $(postForm).toggleClass('d-flex d-none')
   if($(newBtn).text() === 'New Post'){
@@ -88,6 +95,7 @@ const toggleNewForm = (event) => {
   }
 }
 
+  //Update post button
 const toggleUpdateForm = (event) => {
   $(event.target).parent().find('.update-post-form').toggleClass('d-flex d-none')
   if($(event.target).text() === 'Update Post'){
@@ -99,6 +107,8 @@ const toggleUpdateForm = (event) => {
   }
 }
 
+
+//Event Listeners
 newBtn.on('click', toggleNewForm)
 updateBtn.on('click', toggleUpdateForm)
 deleteBtn.on('click', deletePostHandler)

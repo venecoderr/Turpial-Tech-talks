@@ -1,9 +1,12 @@
+//Imports for Models, Router and utilities
 import { Router } from 'express'
 import { User, Post, Comment } from '../models/Index.js'
 import { withAuth } from '../utils/auth.js'
 
+//Router instance
 export const homeRoutes = Router()
 
+//GET for main page
 homeRoutes.get('/', async (req, res) => {
   const postData = await Post.findAll({ 
     include: [
@@ -31,6 +34,7 @@ homeRoutes.get('/', async (req, res) => {
   })
 })
 
+//GET for profile page
 homeRoutes.get('/profile', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -62,16 +66,8 @@ homeRoutes.get('/profile', withAuth, async (req, res) => {
   }
 })
 
+//GET for login page
 homeRoutes.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/profile')
-    return
-  }else{
-    res.render('login')
-  }
-})
-
-homeRoutes.get('/signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/profile')
     return

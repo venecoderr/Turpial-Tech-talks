@@ -1,7 +1,9 @@
+//Imports
 import { DataTypes, Model } from 'sequelize'
 import bcrypt from 'bcrypt'
 import { sequelize } from '../config/connection.js'
 
+//Model definition
 export class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password)

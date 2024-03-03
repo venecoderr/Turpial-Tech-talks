@@ -1,8 +1,11 @@
+//Imports
 import { Sequelize } from 'sequelize'
 import 'dotenv/config'
 
+//DB variable
 let sequelize
 
+//Selects DB connection based on Heroku or local use
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL)
 } else {
@@ -18,4 +21,5 @@ if (process.env.JAWSDB_URL) {
 )
 }
 
+//Exports DB instance
 export { sequelize }
