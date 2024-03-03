@@ -12,6 +12,7 @@ To test my understanding of the MVC architecture I put together a blogpost app w
 - [Usage](#usage)
 - [Questions](#questions)
 - [License](#license)
+- [Deployment}(#deployment)
 
 ## Installation
 
@@ -49,3 +50,7 @@ For questions contact me at [Github](https://github.com/venecoderr) or [Email me
 ## License
 
 This project is under the Unlicense license
+
+## Deployment
+
+https://turpial-tech-talks-51a893c3d6a6.herokuapp.com/
