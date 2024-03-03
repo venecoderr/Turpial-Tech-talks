@@ -1,8 +1,11 @@
+//Imports
 import $ from "./utils/jQuery.js"
 
+//Selectors
 let logInForm = $('#login-form')
 let signUpForm = $('#sign-up-form')
 
+//Handles login form
 const loginFormHandler = async (event) => {
   event.preventDefault()
 
@@ -24,6 +27,7 @@ const loginFormHandler = async (event) => {
   }
 }
 
+//Handles signup form
 const signupFormHandler = async (event) => {
   event.preventDefault()
 
@@ -52,6 +56,6 @@ const signupFormHandler = async (event) => {
   }
 }
 
-
+//Event listeners
 logInForm.on('submit', loginFormHandler)
 signUpForm.on('submit', signupFormHandler)

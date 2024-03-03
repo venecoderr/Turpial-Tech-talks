@@ -1,8 +1,11 @@
+//Imports
 import $ from "./utils/jQuery.js"
 
+//Selectors
 const commentBtn = $('.add-comment-btn')
 const loggedIn = $('#app').attr('data-logged-in')
 
+//Handles new comment form
 const newCommentHandler = async (event) => {
     const commentText = $(event.target).parent().find('#input-comment').val()
     const postToComment = $(event.target).attr('data-post-id')
@@ -27,4 +30,5 @@ const newCommentHandler = async (event) => {
     }
 }
 
+//Event listeners
 commentBtn.on('click', newCommentHandler)
